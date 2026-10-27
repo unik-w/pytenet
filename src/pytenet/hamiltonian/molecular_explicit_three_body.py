@@ -317,15 +317,15 @@ class MolecularThreeBodyOpGraphNodes:
                 for k in range(i + 1, nsites - 1):
                     add_edge(self.a_ann_a_ann_l[i, j][k].nid,
                              self.a_ann_a_ann_l[i, j][k + 1].nid, MolecularOID.I)
-        for i in range(h):
-            for j in range(h):
+        for i in range(nsites - 1):
+            for j in range(nsites - 1):
                 if i < j:
                     add_edge(self.a_dag_l[i][j].nid, self.a_dag_a_ann_l[i, j][j + 1].nid, MolecularOID.A)
                 elif i == j:
                     add_edge(self.identity_l[i].nid, self.a_dag_a_ann_l[i, j][i + 1].nid, MolecularOID.N)
                 else:
                     add_edge(self.a_ann_l[j][i].nid, self.a_dag_a_ann_l[i, j][i + 1].nid, MolecularOID.C)
-                for k in range(max(i, j) + 1, h):
+                for k in range(max(i, j) + 1, nsites - 1):
                     add_edge(self.a_dag_a_ann_l[i, j][k].nid,
                              self.a_dag_a_ann_l[i, j][k + 1].nid, MolecularOID.I)
 
@@ -362,7 +362,7 @@ class MolecularThreeBodyOpGraphNodes:
                              self.a_dag_a_dag_a_dag_l[i, j, k][k + 1].nid, MolecularOID.C)
                     for m in range(k + 1, h):
                         add_edge(self.a_dag_a_dag_a_dag_l[i, j, k][m].nid,
-                                 self.a_dag_a_dag_a_dag_l[i, j, k][m + 1].nid, MolecularOID.I)
+                                 self.a_dag_a_dag_a_dag_l[i, j, k][m + 1].nid, MolecularOID.Z)
         for i in range(h):
             for j in range(i):
                 for k in range(j):
@@ -370,7 +370,7 @@ class MolecularThreeBodyOpGraphNodes:
                              self.a_ann_a_ann_a_ann_l[i, j, k][i + 1].nid, MolecularOID.A)
                     for m in range(i + 1, h):
                         add_edge(self.a_ann_a_ann_a_ann_l[i, j, k][m].nid,
-                                 self.a_ann_a_ann_a_ann_l[i, j, k][m + 1].nid, MolecularOID.I)
+                                 self.a_ann_a_ann_a_ann_l[i, j, k][m + 1].nid, MolecularOID.Z)
        
         for i in range(h):
             for j in range(i + 1, h):
@@ -394,7 +394,7 @@ class MolecularThreeBodyOpGraphNodes:
 
                     for m in range(m0, h):
                         add_edge(self.a_dag_a_dag_a_ann_l[i, j, a][m].nid,
-                                 self.a_dag_a_dag_a_ann_l[i, j, a][m + 1].nid, MolecularOID.I)
+                                 self.a_dag_a_dag_a_ann_l[i, j, a][m + 1].nid, MolecularOID.Z)
        
         for c in range(h):
             for i in range(h):
@@ -415,7 +415,7 @@ class MolecularThreeBodyOpGraphNodes:
 
                     for m in range(m0, h):
                         add_edge(self.a_dag_a_ann_a_ann_l[c, i, j][m].nid,
-                                 self.a_dag_a_ann_a_ann_l[c, i, j][m + 1].nid, MolecularOID.I)
+                                 self.a_dag_a_ann_a_ann_l[c, i, j][m + 1].nid, MolecularOID.Z)
 
         
         for i in range(h + 1, nsites - 2):
@@ -423,7 +423,7 @@ class MolecularThreeBodyOpGraphNodes:
                 for k in range(j + 1, nsites):
                     for m in range(h + 1, i):
                         add_edge(self.a_dag_a_dag_a_dag_r[i, j, k][m].nid,
-                                 self.a_dag_a_dag_a_dag_r[i, j, k][m + 1].nid, MolecularOID.I)
+                                 self.a_dag_a_dag_a_dag_r[i, j, k][m + 1].nid, MolecularOID.Z)
                     add_edge(self.a_dag_a_dag_a_dag_r[i, j, k][i].nid,
                              self.a_dag_a_dag_r[j, k][i + 1].nid, MolecularOID.C)
         for i in range(h + 1, nsites):
@@ -431,7 +431,7 @@ class MolecularThreeBodyOpGraphNodes:
                 for k in range(h + 1, j):
                     for m in range(h + 1, k):
                         add_edge(self.a_ann_a_ann_a_ann_r[i, j, k][m].nid,
-                                 self.a_ann_a_ann_a_ann_r[i, j, k][m + 1].nid, MolecularOID.I)
+                                 self.a_ann_a_ann_a_ann_r[i, j, k][m + 1].nid, MolecularOID.Z)
                     add_edge(self.a_ann_a_ann_a_ann_r[i, j, k][k].nid,
                              self.a_ann_a_ann_r[i, j][k + 1].nid, MolecularOID.A)
        
@@ -441,7 +441,7 @@ class MolecularThreeBodyOpGraphNodes:
                     m1 = min(i, j, a)
                     for m in range(h + 1, m1):
                         add_edge(self.a_dag_a_dag_a_ann_r[i, j, a][m].nid,
-                                 self.a_dag_a_dag_a_ann_r[i, j, a][m + 1].nid, MolecularOID.I)
+                                 self.a_dag_a_dag_a_ann_r[i, j, a][m + 1].nid, MolecularOID.Z)
 
                     if a < i:
                         add_edge(self.a_dag_a_dag_a_ann_r[i, j, a][m1].nid,
@@ -467,7 +467,7 @@ class MolecularThreeBodyOpGraphNodes:
                     m1 = min(c, i, j)
                     for m in range(h + 1, m1):
                         add_edge(self.a_dag_a_ann_a_ann_r[c, i, j][m].nid,
-                                 self.a_dag_a_ann_a_ann_r[c, i, j][m + 1].nid, MolecularOID.I)
+                                 self.a_dag_a_ann_a_ann_r[c, i, j][m + 1].nid, MolecularOID.Z)
 
                     if c < i:
                         add_edge(self.a_dag_a_ann_a_ann_r[c, i, j][m1].nid,
@@ -615,7 +615,7 @@ def _molecular_hamiltonian_graph_add_term(graph: OpGraph, nodes: MolecularThreeB
             nodes_r = nodes.get([(l, oid3), (m, oid4), (n, oid5)], "right")
             graph.add_connect_edge(
                 OpGraphEdge(eid_next, [nodes_l[h].nid, nodes_r[h + 1].nid],
-                            [(MolecularOID.I, coeff)]))
+                            [(MolecularOID.Z, coeff)]))
     else:
         raise NotImplementedError
 
