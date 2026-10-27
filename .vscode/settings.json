@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "git merge": true,
+        "git stash": true,
+        "git push": true,
+        "/Users/Q662452/Projects/pytenet/.venv/bin/python": true
+    }
+}
